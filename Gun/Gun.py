@@ -178,15 +178,16 @@ class Gun:
             targetting_event - событие изменение позиции мыши
         """
         if targetting_event:
-            self.an = math.atan((targetting_event.pos[1] - self.y1) / (targetting_event.pos[0] - (self.x1 - 20)))
-            self.x2 = self.x1 + self.f2_power * math.cos(self.an)
-            self.y2 = self.y1 + self.f2_power * math.sin(self.an)
-            if targetting_event.pos[0] - (self.x1 - 20) > 0:
-                self.x2 = self.x2
-                self.y2 = self.y2
-            else:
-                self.x2 = 2*self.x1 - self.x2
-                self.y2 = 2*self.y1 - self.y2
+            if (targetting_event.pos[0] - (self.x1 - 20)) != 0:
+                self.an = math.atan((targetting_event.pos[1] - self.y1) / (targetting_event.pos[0] - (self.x1 - 20)))
+                self.x2 = self.x1 + self.f2_power * math.cos(self.an)
+                self.y2 = self.y1 + self.f2_power * math.sin(self.an)
+                if targetting_event.pos[0] - (self.x1 - 20) > 0:
+                    self.x2 = self.x2
+                    self.y2 = self.y2
+                else:
+                    self.x2 = 2*self.x1 - self.x2
+                    self.y2 = 2*self.y1 - self.y2
 
         if self.f2_on:
             self.color = RED
